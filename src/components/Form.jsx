@@ -1,26 +1,37 @@
 import { useState } from 'react';
 
 export default function Form({ onSetItems, items }) {
-  const [item, setItem] = useState('');
-  const [value, setValue] = useState(1);
+  const [description, setDescription] = useState('');
+  const [quantity, setQuantity] = useState(1);
 
   function handleSubmit(e) {
     e.preventDefault();
+
+    if (!description) {
+      return;
+    }
+
     onSetItems([
       ...items,
       {
-        id: 4,
-        description: item,
-        quantity: value,
+        id: Math.floor(Math.random() * 1000000000),
+        description,
+        quantity,
         packed: false,
       },
     ]);
+
+    setDescription('');
+    setQuantity(1);
   }
 
   return (
     <form className="add-form" onSubmit={handleSubmit}>
-      <h3>What do you need for your trip? 🩳</h3>
-      <select value={value} onChange={(e) => setValue(e.target.value)}>
+      <h3>What do you need for your trip? ⛱️</h3>
+      <select
+        value={quantity}
+        onChange={(e) => setQuantity(Number(e.target.value))}
+      >
         {Array.from({ length: 20 }, (_, i) => i + 1).map((number) => (
           <option key={number} value={number}>
             {number}
@@ -30,8 +41,8 @@ export default function Form({ onSetItems, items }) {
       <input
         type="text"
         placeholder="Item..."
-        value={item}
-        onChange={(e) => setItem(e.target.value)}
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
       />
       <button type="submit">ADD</button>
     </form>

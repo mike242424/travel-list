@@ -12,11 +12,20 @@ const initialItems = [
 
 export default function App() {
   const [items, setItems] = useState(initialItems);
+
+  function handleAddItems(item) {
+    setItems((items) => [...items, item]);
+  }
+
+  function handleDeleteItems(id) {
+    setItems((items) => items.filter((item) => item.id !== id));
+  }
+
   return (
     <div className="app">
       <Logo />
-      <Form onSetItems={setItems} items={items} />
-      <PackingList items={items} />
+      <Form onAddItems={handleAddItems} />
+      <PackingList items={items} onDeleteItems={handleDeleteItems} />
       <Stats />
     </div>
   );

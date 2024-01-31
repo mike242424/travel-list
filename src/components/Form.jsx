@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function Form({ onSetItems, items }) {
+export default function Form({ onAddItems }) {
   const [description, setDescription] = useState('');
   const [quantity, setQuantity] = useState(1);
 
@@ -11,15 +11,14 @@ export default function Form({ onSetItems, items }) {
       return;
     }
 
-    onSetItems([
-      ...items,
-      {
-        id: Math.floor(Math.random() * 1000000000),
-        description,
-        quantity,
-        packed: false,
-      },
-    ]);
+    const newItem = {
+      id: Math.floor(Math.random() * 1000000000),
+      description,
+      quantity,
+      packed: false,
+    };
+
+    onAddItems(newItem);
 
     setDescription('');
     setQuantity(1);

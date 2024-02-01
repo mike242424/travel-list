@@ -5,7 +5,8 @@ export default function PackingList({
   items,
   onDeleteItems,
   onSetItems,
-  onHandleTogglePacked,
+  onTogglePacked,
+  onClearList,
 }) {
   const [sortBy, setSortBy] = useState('input');
 
@@ -17,9 +18,7 @@ export default function PackingList({
       .slice()
       .sort((a, b) => a.description.localeCompare(b.description));
   } else if (sortBy === 'packed') {
-    sortedItems = items
-      .slice()
-      .sort((a, b) => Number(a.packed) - Number(b.packed));
+    sortedItems = items.slice().sort((a, b) => a.packed - b.packed);
   }
 
   return (
@@ -32,7 +31,7 @@ export default function PackingList({
             key={item.id}
             onDeleteItems={onDeleteItems}
             onSetItems={onSetItems}
-            onHandleTogglePacked={onHandleTogglePacked}
+            onHandleTogglePacked={onTogglePacked}
           />
         ))}
       </ul>
@@ -43,6 +42,7 @@ export default function PackingList({
           <option value="description">Sort by description</option>
           <option value="packed">Sort by packed status</option>
         </select>
+        <button onClick={onClearList}>Clear List</button>
       </div>
     </div>
   );

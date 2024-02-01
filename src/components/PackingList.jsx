@@ -6,7 +6,6 @@ export default function PackingList({
   onSetItems,
   onHandleTogglePacked,
 }) {
-  console.log(items);
   return (
     <div className="list">
       <ul>

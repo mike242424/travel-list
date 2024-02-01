@@ -33,7 +33,7 @@ export default function App() {
         onSetItems={setItems}
         onHandleTogglePacked={handleTogglePacked}
       />
-      <Stats />
+      <Stats items={items} />
     </div>
   );
 }

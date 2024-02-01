@@ -1,10 +1,10 @@
-export default function Item({ item, onDeleteItems }) {
+export default function Item({ item, onDeleteItems, onHandleTogglePacked }) {
   return (
     <li>
       <input
         type="checkbox"
-        checked={item.packed}
-        onChange={() => console.log('checked')}
+        value={item.packed}
+        onChange={() => onHandleTogglePacked(item.id)}
       />
       <span style={item.packed ? { textDecoration: 'line-through' } : {}}>
         {item.quantity} {item.description}
